@@ -16,7 +16,7 @@ def echo_socket(ws):
 
 @app.route('/')
 def hello():
-    return 'Hello World!'
+    return '<h1>Hello WebSocket!</h1>'
 
 
 if __name__ == "__main__":
