@@ -1,6 +1,12 @@
+#!python3
 from flask import Flask
 from flask_sockets import Sockets
+import logging
+import asyncio
 import os
+from hbmqtt.broker import Broker
+import yaml
+import threading
 
 
 app = Flask(__name__)
@@ -18,10 +24,35 @@ def echo_socket(ws):
 def hello():
     return '<h1>Hello WebSocket!</h1>'
 
+@asyncio.coroutine
+def broker_coro():
+    stream = """ 
+listeners:
+    default:
+        max-connections: 8081
+        type: tcp
+    my-ws-1:
+        bind: 0.0.0.0:8080
+        type: ws
+timeout-disconnect-delay: 2
+    """
+    config = yaml.load(stream)
+    print(config)
+    broker = Broker(config=config)
+    yield from broker.start()
+    
+def start_flask():
+    app.run(host="0.0.0.0",port=8081)
 
 if __name__ == "__main__":
-    from gevent import pywsgi
-    from geventwebsocket.handler import WebSocketHandler
-    print(os.environ['PORT'])
-    server = pywsgi.WSGIServer(('', int(os.environ['PORT'])), app, handler_class=WebSocketHandler)
-    server.serve_forever()
+    #from gevent import pywsgi
+    #from geventwebsocket.handler import WebSocketHandler
+    #print(os.environ['PORT'])
+    #server = pywsgi.WSGIServer(('', int(os.environ['PORT'])), app, handler_class=WebSocketHandler)
+    #server.serve_forever()
+    t = threading.Thread(target=start_flask)
+    t.start()
+    formatter = "[%(asctime)s] :: %(levelname)s :: %(name)s :: %(message)s"
+    logging.basicConfig(level=logging.INFO, format=formatter)
+    asyncio.get_event_loop().run_until_complete(broker_coro())
+    asyncio.get_event_loop().run_forever()
