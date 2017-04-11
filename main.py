@@ -29,10 +29,10 @@ def broker_coro():
     stream = """ 
 listeners:
     default:
-        max-connections: 8081
+        max-connections: 443
         type: tcp
     my-ws-1:
-        bind: 0.0.0.0:8080
+        bind: 0.0.0.0:"""+os.environ['PORT']+"""
         type: ws
 timeout-disconnect-delay: 2
     """
@@ -42,9 +42,9 @@ timeout-disconnect-delay: 2
     yield from broker.start()
     
 def start_flask():
-    app.run(host="0.0.0.0",port=8081)
+    app.run(host="0.0.0.0",port=443)
 
-if __name__ == "__main__":
+def main_entry:
     #from gevent import pywsgi
     #from geventwebsocket.handler import WebSocketHandler
     #print(os.environ['PORT'])
