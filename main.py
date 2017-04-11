@@ -32,7 +32,7 @@ listeners:
         max-connections: 443
         type: tcp
     my-ws-1:
-        bind: 0.0.0.0:"""+os.environ['PORT']+"""
+        bind: 0.0.0.0:8080
         type: ws
 timeout-disconnect-delay: 2
     """
