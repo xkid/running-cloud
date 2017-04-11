@@ -44,7 +44,7 @@ timeout-disconnect-delay: 2
 def start_flask():
     app.run(host="0.0.0.0",port=443)
 
-def main_entry:
+def main_entry():
     #from gevent import pywsgi
     #from geventwebsocket.handler import WebSocketHandler
     #print(os.environ['PORT'])
