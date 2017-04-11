@@ -42,9 +42,9 @@ timeout-disconnect-delay: 2
     yield from broker.start()
     
 def start_flask():
-    app.run(host="0.0.0.0",port=443)
+    app.run(host="0.0.0.0",port=8081)
 
-def main_entry():
+if __name__ == "__main__"
     #from gevent import pywsgi
     #from geventwebsocket.handler import WebSocketHandler
     #print(os.environ['PORT'])
