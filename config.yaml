@@ -1,8 +1,7 @@
 listeners:
     default:
-        max-connections: 80
-        type: tcp
-    my-ws-1:
         bind: 0.0.0.0:8080
         type: ws
 timeout-disconnect-delay: 2
+auth:
+    allow-anonymous: true
