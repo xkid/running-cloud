@@ -3,6 +3,6 @@ listeners:
         max-connections: 8081
         type: tcp
     my-ws-1:
-        bind: 0.0.0.0:8080
+        bind: 0.0.0.0:#{process.env.PORT}
         type: ws
 timeout-disconnect-delay: 2
