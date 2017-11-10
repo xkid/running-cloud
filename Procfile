@@ -1,1 +1,1 @@
-web: gunicorn -k flask_sockets.worker main:app
+web: hbmqtt -c config.yaml
