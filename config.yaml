@@ -1,6 +1,6 @@
 listeners:
     default:
-        max-connections: 8081
+        max-connections: 80
         type: tcp
     my-ws-1:
         bind: 0.0.0.0:#{process.env.PORT}
