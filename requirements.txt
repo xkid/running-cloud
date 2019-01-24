@@ -1,5 +1,5 @@
 Flask==0.12.1
 Flask-Sockets==0.2.1
-PyYAML==3.12
+pyyaml>=4.2b1
 gunicorn==19.7.1
 hbmqtt==0.9.1
